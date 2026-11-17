@@ -6,8 +6,10 @@
 
 Azure Resiliency Agent helps you understand Azure resiliency, assess an application architecture,
 generate new zone-resilient infrastructure as code, and review existing Bicep, ARM JSON, or
-Terraform before deployment. It also inspects and manages ordinary Azure Service Groups,
-zonal-resiliency goals, goal-resource participation, SLIs, and Standard Usage Plans.
+Terraform before deployment. It also inspects deployed zonal posture, checks enablement readiness,
+performs confirmed supported zonal updates, generates existing-resource remediation or replacement
+scaffolds, and manages ordinary Azure Service Groups, zonal-resiliency goals, goal-resource
+participation, SLIs, and Standard Usage Plans.
 
 The plugin combines a GitHub Copilot agent with the authoritative Azure Resiliency tools in Azure
 MCP. The agent gathers repository context and orchestrates the workflow; the hosted Azure
@@ -121,7 +123,7 @@ After installation:
 
 ## What's included
 
-The plugin provides one customer-facing agent backed by thirteen Azure MCP tools.
+The plugin provides one customer-facing agent backed by sixteen Azure MCP tools.
 
 | Azure MCP tool | What it does |
 | --- | --- |
@@ -138,6 +140,9 @@ The plugin provides one customer-facing agent backed by thirteen Azure MCP tools
 | `resiliencyagent_usage-plan_manage` | Creates or attaches a Standard Usage Plan with backend-owned confirmation. |
 | `resiliencyagent_service-group_get` | Reads Service Group existence, metadata, criticality, child-group state, and members. |
 | `resiliencyagent_service-group_manage` | Creates Service Groups, adds validated resources or scopes, nests groups, and updates criticality with confirmation. |
+| `resiliencyagent_zonal-resiliency_get` | Reads deployed zonal posture, compares Service Groups, shows resource details, and checks enablement readiness. |
+| `resiliencyagent_zonal-resiliency_manage` | Enables zonal resiliency on supported existing resources through backend-owned prerequisite checks and confirmation. |
+| `resiliencyagent_zonal-resiliency_generate` | Generates but does not deploy existing-resource remediation scripts or replacement-resource scaffolds. |
 
 ## Common workflows
 
@@ -206,6 +211,48 @@ Assign a zonal-resiliency goal to ContosoAppFleetSG.
 The backend asks for explicit confirmation before supported mutations. Cross-Service Group status
 reads are supported, but cross-Service Group mutations and non-zonal goals are not.
 
+### Inspect deployed zonal posture
+
+Name the Service Group, resource, resource type, resource group, or subscription:
+
+```text
+Show the zonal-resiliency posture of Service Group ContosoAppFleetSG.
+```
+
+```text
+Can zone redundancy be enabled on this Azure resource ID?
+```
+
+The agent validates the scope, retrieves the required summary and resource details, and returns
+authoritative posture and prerequisite artifacts. A complete Service Group assessment can also
+include goal, SLI, risk, recommendation, drill, recovery-plan, and application-health context.
+
+### Enable zonal resiliency
+
+```text
+Enable zone redundancy on this Azure resource ID.
+```
+
+The backend determines whether the resource supports a direct update, checks prerequisites, and asks
+for explicit confirmation when required. The agent never confirms a mutation for you.
+
+### Generate zonal-resiliency scripts
+
+For an existing resource:
+
+```text
+Generate a PowerShell script to enable zone redundancy on this Azure resource ID.
+```
+
+For a replacement based on an existing resource:
+
+```text
+Generate Bicep for a zone-resilient replacement of this existing NAT Gateway.
+```
+
+The agent asks for missing non-secret values and returns the generated files without deploying them.
+Use the general infrastructure-as-code generation workflow for resources created from scratch.
+
 ### Inspect or manage a Service Group
 
 ```text
@@ -253,6 +300,9 @@ Depending on the request, the Azure Resiliency service may return:
 - Corrected content for existing infrastructure-as-code files.
 - Service Group member and resource-resolution reports.
 - Goal-status and goal-resource participation reports.
+- Zonal-posture, enablement-readiness, and enablement-results reports.
+- Full Service Group assessment reports.
+- Existing-resource zonal-remediation or replacement scripts.
 - Suggested next steps for continuing the same conversation.
 
 New generated files, detailed reports, and structured Service Group and Goals results are preserved
