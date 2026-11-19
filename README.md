@@ -136,10 +136,10 @@ The plugin provides one customer-facing agent backed by sixteen Azure MCP tools.
 | `resiliencyagent_terraform_review` | Reviews existing Terraform root modules, local child modules, variables, and provider constraints and returns corrected content. |
 | `resiliencyagent_goals_get` | Reads goal assignments, cross-Service Group goal status, goal-resource participation, and Availability or Latency SLIs. |
 | `resiliencyagent_goals_manage` | Assigns or deletes a zonal-resiliency goal, attaches SLIs, includes or excludes resources, and refreshes goal resources with confirmation. |
-| `resiliencyagent_usage-plan_get` | Lists or finds Usage Plans and checks Service Group enrollment status. |
-| `resiliencyagent_usage-plan_manage` | Creates or attaches a Standard Usage Plan with backend-owned confirmation. |
-| `resiliencyagent_service-group_get` | Reads Service Group existence, metadata, criticality, child-group state, and members. |
-| `resiliencyagent_service-group_manage` | Creates Service Groups, adds validated resources or scopes, nests groups, and updates criticality with confirmation. |
+| `resiliencyagent_usageplan_get` | Lists or finds Usage Plans and checks Service Group enrollment status. |
+| `resiliencyagent_usageplan_manage` | Creates or attaches a Standard Usage Plan with backend-owned confirmation. |
+| `resiliencyagent_servicegroup_get` | Reads Service Group existence, metadata, criticality, child-group state, and members. |
+| `resiliencyagent_servicegroup_manage` | Creates Service Groups, adds validated resources or scopes, nests groups, and updates criticality with confirmation. |
 | `resiliencyagent_zonal-resiliency_get` | Reads deployed zonal posture, compares Service Groups, shows resource details, and checks enablement readiness. |
 | `resiliencyagent_zonal-resiliency_manage` | Enables zonal resiliency on supported existing resources through backend-owned prerequisite checks and confirmation. |
 | `resiliencyagent_zonal-resiliency_generate` | Generates but does not deploy existing-resource remediation scripts or replacement-resource scaffolds. |
