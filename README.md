@@ -291,7 +291,8 @@ Execute the latest persisted Discovery Service Group arrangement.
 
 The backend owns Discovery Agent and Reader setup, validation, planning, and confirmation. The
 initial execution request is not approval to write Azure. Discovery reports and arrangement
-artifacts retain their backend filenames, Azure Portal links, cards, and accordions.
+artifacts preserve their authoritative content, Azure Portal links, cards, and accordions. Local
+filenames use Azure MCP's standard safe-name sanitization.
 
 ### Inspect or manage a Standard Usage Plan
 

@@ -137,6 +137,11 @@ after the user has requested the artifact.
 Use the general IaC generation command when the user wants a new resource from scratch or a complete
 application architecture.
 
+For every zonal-resiliency command, treat a completed backend reply as authoritative and terminal.
+Present it and stop. Do not retry the tool, act on `suggestedNextSteps`, infer another assessment,
+generation, or mutation, or invoke another Azure Resiliency command without a new explicit user
+request. A declined or cancelled enablement response is also terminal.
+
 ## Goals and goal-resource participation
 
 Use the Goals get command for read-only goal-assignment status, cross-Service Group goal status,
@@ -208,9 +213,11 @@ and greenfield generation. Zonal-resiliency commands own supported existing-reso
 remediation. General IaC generation owns new resources and complete architectures from scratch.
 
 Treat every returned Discovery Markdown artifact as authoritative Azure Resiliency output. Preserve
-the exact filename and content, including Azure Portal links, cards, accordions, and other
-Portal-specific Markdown directives. Do not regenerate, reinterpret, transcode, sanitize, reformat,
-reject, or rewrite the artifact. A chat summary may supplement an artifact but must not replace it.
+its content exactly, including Azure Portal links, cards, accordions, and other Portal-specific
+Markdown directives. Use the local filename and workspace link returned by Azure MCP. Azure MCP may
+apply its standard path, whitespace, control-character, and invalid-character sanitization; do not
+otherwise rename, regenerate, reinterpret, transcode, reformat, reject, or rewrite the artifact. A
+chat summary may supplement an artifact but must not replace it.
 
 ## Mandatory file handoff
 
