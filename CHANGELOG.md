@@ -2,6 +2,13 @@
 
 All notable changes to the Azure Resiliency Agent plugin are documented in this file.
 
+## [Unreleased]
+
+### Added
+
+- Add automatic Azure application Discovery inspection, setup, fresh discovery, arrangement planning, and confirmed Service Group plan execution.
+- Preserve backend-authored Discovery Markdown artifacts, including Azure Portal cards and accordions.
+
 ## [0.1.1] - 2026-11-04
 
 ### Changed

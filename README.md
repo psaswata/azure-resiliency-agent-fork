@@ -123,7 +123,7 @@ After installation:
 
 ## What's included
 
-The plugin provides one customer-facing agent backed by sixteen Azure MCP tools.
+The plugin provides one customer-facing agent backed by nineteen Azure MCP tools.
 
 | Azure MCP tool | What it does |
 | --- | --- |
@@ -140,9 +140,12 @@ The plugin provides one customer-facing agent backed by sixteen Azure MCP tools.
 | `resiliencyagent_usageplan_manage` | Creates or attaches a Standard Usage Plan with backend-owned confirmation. |
 | `resiliencyagent_servicegroup_get` | Reads Service Group existence, metadata, criticality, child-group state, and members. |
 | `resiliencyagent_servicegroup_manage` | Creates Service Groups, adds validated resources or scopes, nests groups, and updates criticality with confirmation. |
-| `resiliencyagent_zonal-resiliency_get` | Reads deployed zonal posture, compares Service Groups, shows resource details, and checks enablement readiness. |
-| `resiliencyagent_zonal-resiliency_manage` | Enables zonal resiliency on supported existing resources through backend-owned prerequisite checks and confirmation. |
-| `resiliencyagent_zonal-resiliency_generate` | Generates but does not deploy existing-resource remediation scripts or replacement-resource scaffolds. |
+| `resiliencyagent_zonalresiliency_get` | Reads deployed zonal posture, compares Service Groups, shows resource details, and checks enablement readiness. |
+| `resiliencyagent_zonalresiliency_manage` | Enables zonal resiliency on supported existing resources through backend-owned prerequisite checks and confirmation. |
+| `resiliencyagent_zonalresiliency_generate` | Generates but does not deploy existing-resource remediation scripts or replacement-resource scaffolds. |
+| `resiliencyagent_discovery_get` | Lists Discovery Agents, checks Reader access, and inspects saved discoveries, boundary reports, and unchanged arrangements. |
+| `resiliencyagent_discovery_manage` | Creates Discovery Agents, assigns Reader access, runs fresh discovery, and creates or edits arrangements with confirmation. |
+| `resiliencyagent_discovery_execute` | Executes the latest persisted Discovery Service Group arrangement only after distinct backend confirmation. |
 
 ## Common workflows
 
@@ -264,7 +267,31 @@ Create a root Service Group named contoso-prod with these validated resource IDs
 ```
 
 Ordinary creation, resource addition, direct scopes, nesting, and criticality updates are supported.
-Automatic application discovery and arrangement planning are not included in this plugin release.
+
+### Discover an application and plan Service Groups
+
+Inspect previous saved discoveries without running discovery again:
+
+```text
+List the previous saved application discoveries for my subscription.
+```
+
+Run a fresh discovery or edit the proposed arrangement:
+
+```text
+The Discovery Agent is already configured. Run a fresh discovery and create a proposed Service
+Group arrangement.
+```
+
+Execute only after reviewing the saved arrangement:
+
+```text
+Execute the latest persisted Discovery Service Group arrangement.
+```
+
+The backend owns Discovery Agent and Reader setup, validation, planning, and confirmation. The
+initial execution request is not approval to write Azure. Discovery reports and arrangement
+artifacts retain their backend filenames, Azure Portal links, cards, and accordions.
 
 ### Inspect or manage a Standard Usage Plan
 
