@@ -182,6 +182,13 @@ validation, sequencing, and confirmation. Present every elicitation or confirmat
 never approve an operation for the user. Standalone agent listing and Reader-access checks belong to
 Discovery get.
 
+Treat every completed Discovery backend reply as authoritative and terminal. Present the completed
+reply and stop. Do not repeat the tool call, act on `suggestedNextSteps`, automatically select a
+discovery reference, infer a fresh run, or invoke another Discovery command without a new explicit
+user request. If a completed response lists matching saved discoveries, wait for the user to select
+a reference or explicitly request a fresh discovery. Suggested next steps are recommendations, not
+authorization.
+
 Use the Discovery execute command only when the user asks to execute or apply the latest persisted
 automatic-discovery Service Group arrangement. The backend validates the latest revision, presents
 the exact arrangement and limits, and asks for a distinct explicit confirmation before any Azure
