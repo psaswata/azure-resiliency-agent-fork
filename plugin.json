@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "azure-resiliency-agent",
-  "version": "0.1.1",
-  "description": "Assess Azure resiliency, inspect and improve deployed zonal posture, discover Azure applications, plan and execute Service Group arrangements, generate and review resilient infrastructure-as-code, and manage Service Groups, goals, and Usage Plans.",
+  "version": "0.1.2",
+  "description": "Assess Azure resiliency and data protection, inspect and improve deployed zonal and Backup posture, discover Azure applications, orchestrate supported Azure Backup changes, generate and review infrastructure-as-code, and manage Service Groups, goals, and Usage Plans.",
   "author": {
     "name": "Microsoft Azure",
     "url": "https://azure.microsoft.com"
@@ -32,6 +32,10 @@
     "discovery-agents",
     "service-group-arrangements",
     "resiliency-goals",
-    "usage-plans"
+    "usage-plans",
+    "data-resiliency",
+    "azure-backup",
+    "azure-site-recovery",
+    "backup-automation"
   ]
 }

@@ -9,7 +9,7 @@ generate new zone-resilient infrastructure as code, and review existing Bicep, A
 Terraform before deployment. It also inspects deployed zonal posture, checks enablement readiness,
 performs confirmed supported zonal updates, generates existing-resource remediation or replacement
 scaffolds, and manages ordinary Azure Service Groups, zonal-resiliency goals, goal-resource
-participation, SLIs, and Standard Usage Plans.
+participation, SLIs, Standard Usage Plans, and supported Azure Backup and recovery workflows.
 
 The plugin combines a GitHub Copilot agent with the authoritative Azure Resiliency tools in Azure
 MCP. The agent gathers repository context and orchestrates the workflow; the hosted Azure
@@ -123,7 +123,7 @@ After installation:
 
 ## What's included
 
-The plugin provides one customer-facing agent backed by nineteen Azure MCP tools.
+The plugin provides one customer-facing agent backed by twenty-two Azure MCP tools.
 
 | Azure MCP tool | What it does |
 | --- | --- |
@@ -146,6 +146,9 @@ The plugin provides one customer-facing agent backed by nineteen Azure MCP tools
 | `resiliencyagent_discovery_get` | Lists Discovery Agents, checks Reader access, and inspects saved discoveries, boundary reports, and unchanged arrangements. |
 | `resiliencyagent_discovery_manage` | Creates Discovery Agents, assigns Reader access, runs fresh discovery, and creates or edits arrangements with confirmation. |
 | `resiliencyagent_discovery_execute` | Executes the latest persisted Discovery Service Group arrangement only after distinct backend confirmation. |
+| `resiliencyagent_dataresiliency_get` | Assesses Azure Backup and Azure Site Recovery (ASR) coverage, posture, alerts, jobs, eligibility, troubleshooting, restore guidance, and portal handoffs. |
+| `resiliencyagent_dataresiliency_manage` | Orchestrates supported guided Azure Backup changes through backend validation, sequencing, and confirmation. |
+| `resiliencyagent_dataresiliency_generate` | Generates but never executes customer-run Azure Backup scripts and ARM, Bicep, or Terraform automation. |
 
 ## Common workflows
 
@@ -308,6 +311,44 @@ group, then attach ContosoAppFleetSG.
 Usage Plans are needed only for premium recovery-plan and drill capabilities. Goals,
 recommendations, and zonal-resiliency insights do not require one.
 
+### Assess Azure Backup and recovery posture
+
+```text
+Assess Azure Backup protected-versus-unprotected coverage for Service Group ContosoAppFleetSG.
+```
+
+```text
+Why are Azure Backup jobs failing across this subscription in the last 7 days?
+```
+
+The agent can assess Backup and ASR alerts, jobs, vaults, policies, protected items, protection
+coverage, recovery-point health, retention, and security posture. It can evaluate Azure VM Backup
+eligibility, explain datasource-specific restore options, troubleshoot failed jobs from returned
+evidence, and provide verified portal guidance for non-VM Backup and ASR workflows.
+
+### Orchestrate supported Azure Backup changes
+
+```text
+Assess and safely enable Azure VM Backup for these VMs, including compatible vault and policy
+selection and disk choices.
+```
+
+Exact values already supplied by the user remain valid inputs, but they do not bypass eligibility,
+compatibility validation, consequence disclosure, or backend confirmation. Native protection
+enablement is currently limited to supported Azure VM Backup scenarios. The plugin does not execute
+ASR configuration, restore operations, or non-VM native Backup enablement.
+
+### Generate Azure Backup automation
+
+```text
+Generate Terraform to configure Azure VM Backup without deploying it.
+```
+
+Supported output includes Azure CLI, native PowerShell, REST, ARM JSON, Bicep, and Terraform for
+supported Azure VM Backup scenarios. The agent can also generate failed-job retrigger scripts and
+confirmed vault-deletion scripts. Generated automation is returned for customer review and is never
+executed or deployed by the plugin.
+
 ## Using local files
 
 When an assessment or template review needs a local file, the agent shows you the file it wants to
@@ -331,6 +372,10 @@ Depending on the request, the Azure Resiliency service may return:
 - Zonal-posture, enablement-readiness, and enablement-results reports.
 - Full Service Group assessment reports.
 - Existing-resource zonal-remediation or replacement scripts.
+- Azure Backup and ASR assessment tables, protection coverage reports, and charts.
+- Azure Backup eligibility and configuration-status reports.
+- Azure Backup Azure CLI, PowerShell, REST, ARM JSON, Bicep, and Terraform automation.
+- Failed-job retrigger and vault-deletion scripts.
 - Suggested next steps for continuing the same conversation.
 
 New generated files, detailed reports, and structured Service Group and Goals results are preserved
@@ -338,6 +383,8 @@ as timestamped artifact sets under `azure-resiliency/`. Multi-file templates kee
 filenames and relative references in one folder. Corrected review content is applied to matching
 existing files without creating duplicate source copies. Structured results use readable Markdown
 with absolute Azure Portal links, and the agent provides clickable file links for review.
+Completed backend responses carry an authoritative presentation policy. The plugin presents those
+responses verbatim and never acts on suggested next steps without a new explicit user selection.
 
 ## Example prompts
 
